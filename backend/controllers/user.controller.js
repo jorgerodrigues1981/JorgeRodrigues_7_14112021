@@ -1,8 +1,8 @@
-
 const mysql = require('../config/dbConnect').connection; 
 const bcrypt = require('bcrypt'); 
 const jwt = require("jsonwebtoken"); 
 const fs = require("fs"); 
+
 
 //////////////////////////////////////////////////
 exports.signup = (req, res, next) => {

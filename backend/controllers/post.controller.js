@@ -1,4 +1,3 @@
-
 const mysql = require('../config/dbConnect').connection;
 const fs = require("fs"); 
 
