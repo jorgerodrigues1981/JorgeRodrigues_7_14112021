@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 
+
 // Protège l'app en paramétrant des Headers (notamment contre les failles XSS)
 app.use(helmet()); 
 
@@ -22,7 +23,8 @@ app.use((req, res, next) => {
 // Pour analyser le corps de la requête
 app.use(express.json());
 
-// Routes
+
+//Routes
 app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);

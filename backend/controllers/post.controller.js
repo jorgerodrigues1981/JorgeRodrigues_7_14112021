@@ -1,6 +1,8 @@
 const mysql = require('../config/dbConnect').connection;
 const fs = require("fs"); 
 
+
+
 exports.getAllPosts = (req, res, next) => {
     const userID = res.locals.userID;
 

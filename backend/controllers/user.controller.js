@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs"); 
 
 
-//////////////////////////////////////////////////
+// MIDDLEWARE SIGNUP  - Inscription de l'utilisateur et hashage du mot de passe
 exports.signup = (req, res, next) => {
 
     bcrypt.hash(req.body.password, 10)
@@ -17,7 +17,7 @@ exports.signup = (req, res, next) => {
             let sqlSignup;
             let values;
 
-            sqlSignup = "INSERT INTO user VALUES (NULL, ?, ?, ?, NULL, ?, NULL, avatarUrl, NOW())";
+            sqlSignup = "INSERT INTO user VALUES (NULL, ?, ?, ?, NULL, ?, NULL, NULL, avatarUrl, NOW())";
             values = [email, firstName, lastName, password,];
             mysql.query(sqlSignup, values, function (err, result) {
                 if (err) {
@@ -29,20 +29,23 @@ exports.signup = (req, res, next) => {
         .catch(e => res.status(500).json(e));
 };
 
-//////////////////////////////////////////////////
+// MIDDLEWARE LOGIN avec vérification de l'email unique
 exports.login = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    const sqlFindUser = "SELECT userID, password FROM User WHERE email = ?";
+    const sqlFindUser = "SELECT userID, password FROM user WHERE email = ?";
+    
 //recherche de l'utilisateur dans la base de données
     mysql.query(sqlFindUser, [email], function (err, result) {
+        
         if (err) {
-            return res.status(500).json(err.message);
+            return res.status(500).json(err.message); 
         }
         if (result.length == 0) {
             return res.status(401).json({ error: "Utilisateur non trouvé !" });
-        }
+        } 
+
 //si l'utilisateur existe, vérification du mot de passe
         bcrypt.compare(password, result[0].password)
             .then(valid => {
@@ -51,18 +54,21 @@ exports.login = (req, res, next) => {
                     return res.status(401).json({ error: "Mot de passe incorrect !" });
                 }
                 res.status(200).json({
-                    token: jwt.sign(
-                        { userID: result[0].userID },
-                        env.token,
-                        { expiresIn: "24h" }
-                    )
+        
+                userID: result[0].userID,
+              // Function sign de jsonwebtoken pour encoder un nouveau token
+                token: jwt.sign(
+                { userID: result[0].userID },
+                'RANDOM_TOKEN_SECRET',
+                { expiresIn: '24h' }
+              )
                 });
             })
             .catch(e => res.status(500).json(e));
     });
 };
 
-//////////////////////////////////////////////////
+// MIDDLEWARE DELETE pour supprimer un utilisateur
 exports.delete = (req, res, next) => {
     const password = req.body.password;
     let passwordHashed;
@@ -81,7 +87,7 @@ exports.delete = (req, res, next) => {
         }
 
         const filename = result[0].avatarUrl.split("/images/")[1];
-        if (filename !== "avatarDefault.png") {
+        if (filename !== "avatarDefault.jpg") {
             fs.unlink(`images/${filename}`, (e) => { // On supprime le fichier image en amont
                 if (e) {
                     console.log(e);
@@ -110,7 +116,7 @@ exports.delete = (req, res, next) => {
     });
 };
 
-//////////////////////////////////////////////////
+// MIDDLEWARE PROFILE
 exports.profile = (req, res, next) => {
     const userID = res.locals.userID;
     let userIDAsked = req.params.id;
@@ -134,7 +140,7 @@ exports.profile = (req, res, next) => {
     });
 };
 
-//////////////////////////////////////////////////
+// MIDDLEWARE MODIFY
 exports.modify = (req, res, next) => {
     const userID = res.locals.userID;
     const email = req.body.email;
@@ -158,7 +164,7 @@ exports.modify = (req, res, next) => {
 
             const filename = result[0].avatarUrl.split("/images/")[1];
             sqlModifyUser = "UPDATE User SET avatarUrl = ? WHERE userID = ?";
-            if (filename !== "avatarDefault.png") {
+            if (filename !== "avatarDefault.jpg") {
                 fs.unlink(`images/${filename}`, () => { // On supprime le fichier image en amont
                     mysql.query(sqlModifyUser, [avatarUrl, userID], function (err, result) {
                         if (err) {
@@ -228,14 +234,16 @@ exports.modify = (req, res, next) => {
                 })
                 .catch(e => res.status(500).json(e));
         });
-    }
+    } 
 };
 
-//////////////////////////////////////////////////
+
 exports.role = (req, res, next) => {
+    
     const userID = res.locals.userID;
 
-    sqlFindUser = "SELECT role FROM User WHERE userID = ?";
+    sqlFindUser = "SELECT role FROM user WHERE userID = ?";
+    
     mysql.query(sqlFindUser, [userID], function (err, result) {
         if (err) {
             return res.status(500).json(err.message);
@@ -246,4 +254,3 @@ exports.role = (req, res, next) => {
         return res.status(200).json(result);
     });
 };
-

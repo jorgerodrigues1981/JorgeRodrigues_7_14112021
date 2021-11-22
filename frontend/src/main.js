@@ -1,5 +1,23 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
 
-createApp(App).use(router).mount('#app')
+// IMPORT AXIOS ET CONFIGURATION
+import axios from "axios";
+
+import store from './store'
+axios.defaults.baseURL = 'http://localhost:3000/api/';
+const token = sessionStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+}
+Vue.prototype.$axios = axios;
+// FIN AXIOS
+
+Vue.config.productionTip = false;
+
+new Vue({
+  router,
+  store,
+  render: h => h(App)
+}).$mount('#app');

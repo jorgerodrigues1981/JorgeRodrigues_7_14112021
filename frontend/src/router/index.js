@@ -1,32 +1,44 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Login from '../views/Login.vue';
+import Signup from '../views/Signup.vue';
+import Feed from '../views/Feed.vue';
+import FeedID from '../views/FeedID.vue';
+import Profile from '../views/Profile.vue';
 
+Vue.use(VueRouter);
+const mode = 'history';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: Login
   },
   {
-    path: '/user',
-    name: 'User',
-    component: () => import('../views/User.vue')
+    path: '/Signup',
+    name: 'Signup',
+    component: Signup
   },
   {
-    path: '/wall',
-    name: 'Wall',
-    component: () => import('../views/Wall.vue')
+    path: '/Feed',
+    name: 'Feed',
+    component: Feed
+  },
+  {
+    path: '/Feed/:id',
+    name: 'FeedID',
+    component: FeedID
+  },
+  {
+    path: '/Profile/:id',
+    name: 'Profile',
+    component: Profile
   }
-]
+];
 
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes
-})
+const router = new VueRouter({
+  routes, mode
+});
 
-export default router
+export default router;
+
