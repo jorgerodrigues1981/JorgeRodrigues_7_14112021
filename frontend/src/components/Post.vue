@@ -20,7 +20,7 @@
         </div>
       </div>
       <!-- Gif du post -->
-      <div class="col-md-4" :class="cursor" role="link" @click="goToFeedID(idPost)">
+      <div class="image_post" role="link" @click="goToFeedID(idPost)">
         <slot name="postGif"></slot>
       </div>
     </div>
@@ -52,7 +52,6 @@
         </p>
       </div>
     </footer>
-    <!-- Fin -->
   </article>
 </template>
 
@@ -180,6 +179,11 @@ p {
     border-radius: 10px;
     padding: 20px;
 }
+
+img {
+  width: 250px;
+}
+
 .commentaire {
   display: flex;
   flex-flow: column nowrap;
@@ -189,10 +193,6 @@ p {
   background-color: #B7ECF1;
   padding: 20px;
   margin: 0 40px;
-}
-
-img {
-  max-height: 300px;
 }
 
 .info_user_text {
