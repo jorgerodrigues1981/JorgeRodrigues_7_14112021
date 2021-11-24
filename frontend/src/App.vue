@@ -14,7 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #000000;
-  background-color: black;
+  background-color: #2C3E50;
   a {
     color: inherit;
   }
@@ -44,4 +44,9 @@
     font-size: 1em;
     padding: 5px;
 }
+
+body {
+        margin: 0;
+        background-color: #2C3E50;
+      }
 </style>

@@ -56,6 +56,7 @@ export default {
 
 .form_createPost {
   background-color: #E5E8E8;
+  width: 80%;
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 20px;
@@ -65,6 +66,8 @@ export default {
 .form-text {
   border-radius: 10px;
   padding: 10px;
+  width: 70%;
+  height: 50px;
 }
 
 .custom-file {

@@ -1,42 +1,31 @@
 <template>
-  <article class="delete_comment">
-    <slot name="commentDelete"></slot>
-    <div class="container_commentaire">
-          <!-- Informations sur l'user -->
-          <header>
-            <div class="info_utilisateur">
-              <p role="link" @click="goToProfile(idUser)">
-                <slot name="userAvatar"></slot>
-                <slot name="userName"></slot>
-                <slot name="userPseudo"></slot>
-              </p>
-            </div>
-          </header>
-          <!-- Fin -->
-          <!-- Corps du commentaire -->
-          <div class="row text-center pt-3">
-            <p class="container_comment">
-              <slot name="commentBody"></slot>
-            </p>
+  <div class="container_commentaire">
+    <div class="delete_commentaire">
+      <slot name="commentDelete"></slot>
+    </div>
+        <div class="header_commentaire" role="link" @click="goToProfile(idUser)">
+            <slot name="userAvatar"></slot><br>
+            <div class="username_commentaire"><slot name="userName"></slot></div>
+            <slot name="userPseudo"></slot>
+        </div>
+    <div class="commentaire">
+      <slot name="commentBody"></slot>
+    </div>
+    <div class="like_dislike">
+      <div class="like_dislike_row">
+          <div><i class="fas fa-thumbs-up" aria-hidden="true" title="Aimer le post" role="button" :class="reactionUp" v-on:click="sendReactionUp"></i>
+              <slot name="commentUp"></slot>
           </div>
-          <!-- Fin -->
-        </div>
-    <!-- Reactions au commentaire et date -->
-    <footer>
-      <div class="container_footer">
-        <div><i class="fas fa-thumbs-up" aria-hidden="true" title="Aimer le post" role="button" :class="reactionUp" v-on:click="sendReactionUp"></i>
-            <slot name="commentUp"></slot>
-        </div>
-        <div>
-          <i class="fas fa-thumbs-down" aria-hidden="true" title="Ne pas aimer le post" role="button" :class="reactionDown" v-on:click="sendReactionDown"></i>
-            <slot name="commentDown"></slot>
-        </div>
+          <div>
+            <i class="fas fa-thumbs-down" aria-hidden="true" title="Ne pas aimer le post" role="button" :class="reactionDown" v-on:click="sendReactionDown"></i>
+              <slot name="commentDown"></slot>
+          </div>
       </div>
       <div>
-          <p><small class="text-muted"><slot name="commentDate"></slot></small></p>
-        </div>
-    </footer>
-  </article>
+            <p><small class="text-muted"><slot name="commentDate"></slot></small></p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -94,74 +83,94 @@ export default {
 </script>
 
 <style scoped>
-header {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-}
-
-.container_footer {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
-}
-
-footer {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  border-radius: 0 0 20px 20px;
-}
-
-.info_utilisateur {
-  background-color: tomato;
-  border-radius: 20px;
-}
-
-header img{
-  width: 50px;
-}
-
-.delete_comment {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-}
 .container_commentaire {
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
+  flex-flow: column;
+  justify-items: center;
   align-items: center;
-  border-radius: 20px 20px 0 0;
-  min-width: 400px;
+  margin-bottom: 20px;
 }
 
-.container {
+.delete_commentaire {
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column;
   justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-}
-.container_comment {
-  background-color: #B7ECF1;
-  border-radius: 20px;
-  width: 200px;
+  align-content: center;
+  background-color: #E74C3C;
+  width: 80%;
+  height: 40px;
 }
 
-img {
-  
+.header_commentaire {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-content: center;
+  background-color: #273746;
+  width: 80%;
+  padding: 10px 0 10px 0;
+  color: white;
+  font-size: 0.8em;
+}
+
+.header_commentaire img {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+  border: 1px solid white;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.header_commentaire img:hover {
+  border: 1px solid #E74C3C;
+}
+
+.commentaire {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-content: center;
+  background-color: #EAECEE;
+  width: 80%;
+  height: 100px;
+}
+
+.like_dislike {
+  display: flex;
+  flex-flow: column;
+  justify-items: center;
+  align-items: center;
+  background-color: #808B96;
+  width: 80%;
+  padding-top: 20px;
+  font-size: 0.9em;
+}
+
+.like_dislike_row {
+  display: flex;
+  flex-flow: row;
+  justify-items: center;
+  align-items: center;
 }
 
 .fas {
   color: white;
-  padding: 5px;
+  margin: 10px;
+  font-size: 1em;
 }
+
+.fas:hover {
+  color: #F1C40F;
+  cursor: pointer;
+}
+
+.username_commentaire {
+  cursor: pointer;
+}
+
+.username_commentaire:hover {
+  text-decoration: underline;
+}
+
 </style>

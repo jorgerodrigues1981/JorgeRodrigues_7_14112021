@@ -96,7 +96,6 @@
             :alertMessage="alert.message"
           />
         </template>
-        <!-- Fin -->
         <!-- Footer post -->
         <template v-slot:postDate>{{ posts[indexLastPost].dateCreation }}</template>
         <template v-slot:postUp>{{ posts[indexLastPost].countUp }}</template>

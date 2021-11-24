@@ -11,7 +11,7 @@
             <div>
               <h2>Mon Profil</h2>
             </div>
-          <div>
+            <div>
               <img :src="user.avatarUrl" alt="Avatar de l'utilisateur"/>
               <h2>{{ fullName }}</h2>
               <p class="user_aditional_info" aria-label="Pseudo" v-if="user.pseudo != null">@{{ user.pseudo }}</p>
@@ -53,7 +53,7 @@
                 </div>
                 <div>
                   <label for="label_form">Nouveau mot de passe : </label><br>
-                  <input class="input_form" type="password" placeholder="Changer de mot de passe" id="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-label="Nouveau mot de passe"/><br>
+                  <input class="input_form" type="password" placeholder="Nouveau mot de passe" id="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" aria-label="Nouveau mot de passe"/><br>
                 </div>
                 <div>
                     <button type="submit" class="btn btn-light" v-on:click.prevent="updateProfile">Confirmer</button>
@@ -230,20 +230,19 @@ export default {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  background-color: #ABEBC6;
-  border-radius: 20px;
+  background-color: #6C3483;
   margin: 20px;
 }
 
 .container_profil {
   display: flex;
   flex-flow: column wrap;
-  background-color: #0B5345;
+  background-color: #5B2C6F;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1em;
   color: white;
   margin-bottom: 20px;
-  border-radius: 20px;
+  border: 2px solid white;
   padding: 10px;
   margin: 20px;
 }
@@ -258,6 +257,7 @@ export default {
 }
 
 .input_form {
+  font-family: 'Courier New', Courier, monospace;
   margin: 10px 3px;
   border-radius: 5px;
   padding: 5px;
@@ -267,32 +267,18 @@ export default {
   width: 300px;
 }
 
-
 .user_info {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  background-color: #1E8449;
-  border-radius: 20px;
-  margin: 20px;
-  padding: 20px;
-}
-
-.user_bio {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #75c7bf;
-  font-size: 1em;
-}
-
-.user_aditional_info {
+  background-color: #AF7AC5;
+  border: 2px solid white;
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8em;
-}
-
-p {
-  font-family: arial;
+  margin: 20px;
+  padding: 20px;
 }
 
 img {
@@ -301,9 +287,9 @@ img {
 }
 
 .container_delete_profile {
-  background-color: #A93226;
+  background-color: #E74C3C;
+  border: 2px solid white;
   padding: 20px;
-  border-radius: 20px;
   margin: 20px;
 }
 </style>

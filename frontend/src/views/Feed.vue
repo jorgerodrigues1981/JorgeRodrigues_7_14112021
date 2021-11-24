@@ -269,4 +269,8 @@ export default {
     background-color: #1b7a1a;
  }
 
+ img {
+   max-width: 300px;
+ }
+
 </style>

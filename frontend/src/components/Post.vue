@@ -12,7 +12,6 @@
                 <div class="info_user_text" role="link" @click="goToProfile(idUser)"><slot name="userPseudo"></slot></div>
             </div>
           </header>
-         
           <!-- Corps du post -->
           <div class="post" :class="cursor" role="link" @click="goToFeedID(idPost)">
             <p><slot name="postLegend"></slot></p>
@@ -24,7 +23,6 @@
       <div class="col-md-4" :class="cursor" role="link" @click="goToFeedID(idPost)">
         <slot name="postGif"></slot>
       </div>
-      <!-- Fin -->
     </div>
     <!-- Création d'un commentaire -->
     <div class="commentaire">
@@ -32,44 +30,19 @@
         <slot name="createComment"></slot>
       </div>
     </div>
-    <!-- Fin -->
     <!-- Reactions au commentaire et date -->
     <footer>
       <div class="commentaires_items">
-        <i
-          class="fas fa-thumbs-up"
-          aria-hidden="true"
-          title="Aimer le post"
-          role="button"
-          :class="reactionUp"
-          v-on:click="sendReactionUp"
-        ></i>
+        <i class="fas fa-thumbs-up" aria-hidden="true" title="Aimer le post" role="button" :class="reactionUp" v-on:click="sendReactionUp"></i>
         <slot name="postUp"></slot>
       </div>
       <div class="commentaires_items">
-        <i
-          class="fas fa-thumbs-down"
-          aria-hidden="true"
-          title="Ne pas aimer le post"
-          role="button"
-          :class="reactionDown"
-          v-on:click="sendReactionDown"
-        ></i>
+        <i class="fas fa-thumbs-down" aria-hidden="true" title="Ne pas aimer le post" role="button" :class="reactionDown" v-on:click="sendReactionDown"></i>
           <slot name="postDown"></slot>
       </div>
       <div class="commentaires_items">
-        <p>
-          <a class="d-md-none">
-            <i
-              class="fas fa-comments"
-              aria-hidden="true"
-              title="Commmenter le post"
-              role="button"
-              v-on:click="displayCommentInput"
-            ></i>
-          </a>
-          <a class="d-none d-md-block pointer" v-on:click="displayCommentInput">Commenter</a>
-        </p>
+          <a><i class="fas fa-comments" aria-hidden="true" title="Commmenter le post" role="button" v-on:click="displayCommentInput"></i></a>
+          <a class="text_commenter" v-on:click="displayCommentInput">Commenter</a>
       </div>
       <div class="commentaires_items">
         <p>
@@ -160,22 +133,28 @@ footer {
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
-  background-color: #13CCDE;
-  border-radius: 0 0 20px 20px;
+  background-color: #73C6B6;
   margin-bottom: 20px;
   margin: 0 40px 20px 40px;
 }
 
 .supression {
-  background-color: tomato;
-  border-radius: 20px 20px 0 0;
+  background-color: #E74C3C;
   margin: 0 40px 0 40px;
 }
 
 .fas {
   color: #ffffff;
   padding: 10px;
+  cursor: pointer;
 }
+
+.fas:hover {
+  color: #F1C40F;
+  padding: 10px;
+  cursor: pointer;
+}
+
 .commentaires_items {
   margin-right: 20px;
 }
@@ -186,10 +165,11 @@ footer {
   height: 50px;
   justify-content: left;
   align-items: center;
-  background-color: #4899A2;
+  background-color: #273746;
   border-radius: 10px;
   font-size: 0.8em;
   padding: 5px 20px;
+  color: white;
 }
 p {
   font-family: Arial, Helvetica, sans-serif;
@@ -203,7 +183,6 @@ p {
 .commentaire {
   display: flex;
   flex-flow: column nowrap;
-  background-color: #4899A2;
 }
 
 .container_posts {
@@ -218,6 +197,11 @@ img {
 
 .info_user_text {
   padding: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+.info_user_text:hover {
+  text-decoration: underline;
 }
 
 .info_user_avatar img {
@@ -225,5 +209,24 @@ img {
   width: 40px;
   border-radius: 50px;
   border: 1px solid white;
+  cursor: pointer;
 }
+
+.info_user_avatar img:hover {
+  border: 1px solid #E74C3C;
+}
+
+.text_commenter {
+  color: #283747;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.text_commenter:hover {
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 </style>

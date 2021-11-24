@@ -12,11 +12,9 @@
       aria-label="Ecrire un commentaire"
       v-model="body"
       v-on:input="sendComment"
-    ></textarea>
-    <!-- Fin -->
+    ></textarea><br>
     <!-- Bouton pour le publier -->
     <slot></slot>
-    <!-- fin -->
   </form>
 </div>
 </template>
@@ -39,12 +37,15 @@ export default {
 
 <style scoped>
 .container_champ_commentaire {
-  background-color: blueviolet;
+  display: flex;
+  flex-flow: column;
+  background-color: #D0D3D4;
+  padding: 20px;
 }
 
 .form_commentaire {
   border: 1px solid black;
-  width: 70%;
+  max-width: 500px;
   margin: 10px;
   border-radius: 10px;
   padding: 10px;
